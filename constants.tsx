@@ -287,12 +287,16 @@ export const RESEARCH: Research[] = [
 
 export const SKILLS: Skill[] = [
   {
+    category: "Languages",
+    items: ["Python", "Java", "C", "C++", "Flutter", "Dart", "Golang", "TypeScript", "JavaScript", "HTML", "CSS", "Rust"]
+  },
+  {
     category: "AI & Machine Learning",
-    items: ["TensorFlow", "PyTorch", "scikit-learn", "Keras", "OpenCV", "MediaPipe", "spaCy", "Hugging Face", "Model Fine-Tuning", "Prompt Engineering", "Adversarial Defense"]
+    items: ["Google Colab", "Transformers", "Data Training", "TensorFlow", "PyTorch", "scikit-learn", "Keras", "OpenCV", "MediaPipe", "spaCy", "Hugging Face", "Model Fine-Tuning", "Prompt Engineering", "Adversarial Defense"]
   },
   {
     category: "Mobile & Web",
-    items: ["Flutter", "Android", "iOS", "Firebase", "Google ML Kit", "TypeScript", "Node.js", "Streamlit", "REST APIs"]
+    items: ["Golang", "Java", "Mobile Architecture", "Flutter", "Android", "iOS", "Firebase", "Google ML Kit", "TypeScript", "Node.js", "Streamlit", "REST APIs"]
   },
   {
     category: "Data Science",

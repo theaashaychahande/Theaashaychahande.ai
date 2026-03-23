@@ -20,13 +20,19 @@ import {
   Menu,
   X,
   MapPin,
-  Microscope
+  Microscope,
+  Terminal,
+  Cpu,
+  Layers,
+  Database,
+  BrainCircuit
 } from 'lucide-react';
 import { PROJECTS, EXPERIENCES, NAV_LINKS, PROCESS_STEPS, EDUCATION, RESEARCH, SKILLS } from './constants';
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
@@ -200,13 +206,14 @@ const App: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROJECTS.map((project, idx) => (
+          {(showAllProjects ? PROJECTS : PROJECTS.slice(0, 6)).map((project, idx) => (
             <motion.div 
               key={project.id}
+              layout
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: (idx % 6) * 0.1 }}
               className="glass rounded-[2rem] p-8 hover:border-[#FF5C00]/30 transition-all group flex flex-col justify-between"
             >
               <div>
@@ -214,7 +221,12 @@ const App: React.FC = () => {
                   <div className="px-4 py-1.5 rounded-full bg-[#FF5C00]/10 text-[#FF5C00] text-[10px] font-bold uppercase tracking-widest">
                     {project.category}
                   </div>
-                  <a href={project.link} className="text-gray-400 hover:text-[#FF5C00] transition-colors">
+                  <a 
+                    href="https://github.com/theaashaychahande" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-400 hover:text-[#FF5C00] transition-colors"
+                  >
                     <ArrowRight size={20} />
                   </a>
                 </div>
@@ -233,34 +245,73 @@ const App: React.FC = () => {
             </motion.div>
           ))}
         </div>
+
+        <div className="mt-16 text-center">
+          <button 
+            onClick={() => setShowAllProjects(!showAllProjects)}
+            className="px-10 py-4 glass hover:bg-white/10 rounded-full font-bold transition-all border border-white/5 hover:border-[#FF5C00]/30 group"
+          >
+            <span className="flex items-center gap-2">
+              {showAllProjects ? 'SHOW LESS PROJECTS' : 'SEE ALL THE PROJECTS'}
+              <ArrowRight className={`transition-transform duration-300 ${showAllProjects ? '-rotate-90' : 'rotate-90'}`} size={18} />
+            </span>
+          </button>
+        </div>
       </section>
 
       {/* Skills - Categorized Grid */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Expertise</span>
-          <h2 className="text-5xl md:text-7xl font-bold font-outfit tracking-tighter">TECHNICAL STACK</h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div>
+            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Expertise</span>
+            <h2 className="text-6xl md:text-8xl font-bold font-outfit tracking-tighter">TECHNICAL STACK</h2>
+          </div>
+          <p className="max-w-xs text-gray-500 leading-relaxed text-sm">
+            A comprehensive overview of my technical capabilities and the tools I use to build intelligent systems.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {SKILLS.map((skillGroup, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass rounded-[2.5rem] p-10 hover:border-[#FF5C00]/30 transition-all group"
-            >
-              <h4 className="text-xl font-bold mb-6 text-[#FF5C00] uppercase tracking-widest text-sm">{skillGroup.category}</h4>
-              <div className="flex flex-wrap gap-3">
-                {skillGroup.items.map((skill, i) => (
-                  <span key={i} className="px-4 py-2 rounded-xl bg-white/5 text-xs font-medium text-gray-400 group-hover:text-white transition-colors">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {SKILLS.map((skillGroup, idx) => {
+            const icons: Record<string, React.ReactNode> = {
+              "Languages": <Terminal size={20} />,
+              "AI & Machine Learning": <BrainCircuit size={20} />,
+              "Mobile & Web": <Layout size={20} />,
+              "Data Science": <Database size={20} />,
+              "Design & Tools": <Layers size={20} />
+            };
+
+            return (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className={`glass rounded-[2.5rem] p-10 hover:border-[#FF5C00]/30 transition-all group ${
+                  idx === 0 || idx === 1 ? 'md:col-span-2 lg:col-span-1' : ''
+                }`}
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FF5C00]/10 flex items-center justify-center text-[#FF5C00] group-hover:bg-[#FF5C00] group-hover:text-white transition-all duration-500">
+                    {icons[skillGroup.category] || <Cpu size={20} />}
+                  </div>
+                  <h4 className="text-xl font-bold font-outfit uppercase tracking-wider text-sm">{skillGroup.category}</h4>
+                </div>
+                
+                <div className="flex flex-wrap gap-3">
+                  {skillGroup.items.map((skill, i) => (
+                    <span 
+                      key={i} 
+                      className="px-4 py-2 rounded-xl bg-white/5 text-xs font-medium text-gray-400 group-hover:text-white group-hover:bg-white/10 transition-all border border-transparent group-hover:border-white/5"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
@@ -452,11 +503,11 @@ const App: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-bold text-gray-500 ml-4">Full Name</label>
-                  <input type="text" placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-3xl px-8 py-5 outline-none focus:border-[#FF5C00] transition-all" />
+                  <input type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-3xl px-8 py-5 outline-none focus:border-[#FF5C00] transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-bold text-gray-500 ml-4">Email Address</label>
-                  <input type="email" placeholder="john@example.com" className="w-full bg-white/5 border border-white/10 rounded-3xl px-8 py-5 outline-none focus:border-[#FF5C00] transition-all" />
+                  <input type="email" placeholder="your@email.com" className="w-full bg-white/5 border border-white/10 rounded-3xl px-8 py-5 outline-none focus:border-[#FF5C00] transition-all" />
                 </div>
               </div>
               <div className="space-y-2">
