@@ -17,57 +17,192 @@ import { Project, Experience, Education, Research, Skill } from './types';
 export const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "Arjuna.ai",
+    title: "Arjuna",
     category: "AI Compliance Assistant",
-    description: "Intelligent compliance assistant for Indian traders, delivering instant GST and tax guidance via WhatsApp.",
+    description: "AI Compliance Assistant by SENECA — instant GST and tax guidance for Indian shopkeepers via WhatsApp",
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800",
     tags: ["TypeScript", "AI", "WhatsApp API"],
     link: "https://github.com/theaashaychahande/arjuna"
   },
   {
     id: 2,
-    title: "Project Drishti",
-    category: "Computer Vision Mobile App",
-    description: "Flutter-based mobile app integrating real-time object detection, text recognition, and image classification using Google ML Kit.",
+    title: "Project_unnat",
+    category: "GovTech System",
+    description: "Hackathon Project (Rank 5th) — CRM GovTech System Architecture",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
-    tags: ["Flutter", "TensorFlow", "Google ML Kit"],
-    link: "https://github.com/theaashaychahande/drishti"
+    tags: ["TypeScript", "CRM", "GovTech"],
+    link: "#"
   },
   {
     id: 3,
-    title: "Sikander",
-    category: "Portfolio Risk Management",
-    description: "Python-based portfolio analytics platform providing institutional-grade risk metrics and performance tracking.",
-    image: "https://images.unsplash.com/photo-1611974714024-4607a507ae21?auto=format&fit=crop&q=80&w=800",
-    tags: ["Python", "Pandas", "Streamlit"],
-    link: "https://github.com/theaashaychahande/sikander"
-  },
-  {
-    id: 4,
-    title: "Vyapar",
-    category: "Inventory Management System",
-    description: "Flutter inventory tracker for small retailers with automated stock monitoring and predictive reordering.",
-    image: "https://images.unsplash.com/photo-1586769852044-692d6e671c85?auto=format&fit=crop&q=80&w=800",
-    tags: ["Flutter", "Firebase", "Dart"],
-    link: "https://github.com/theaashaychahande/vyapar"
-  },
-  {
-    id: 5,
     title: "resolve.exe",
     category: "AI Document Extraction",
-    description: "Context-aware AI system that extracts user-defined specific data from physical and handwritten documents.",
+    description: "Context-Aware AI Document Extraction System — extracts user-defined specific data from physical and handwritten documents into clean structured format",
     image: "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=800",
-    tags: ["TypeScript", "OCR", "AI"],
+    tags: ["TypeScript", "AI", "OCR"],
     link: "https://github.com/theaashaychahande/resolve.exe"
   },
   {
+    id: 4,
+    title: "descam_sandbox",
+    category: "Cybersecurity",
+    description: "Behavioral malware analysis and risk management system",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc48?auto=format&fit=crop&q=80&w=800",
+    tags: ["Python", "Malware Analysis", "Security"],
+    link: "#"
+  },
+  {
+    id: 5,
+    title: "stvincent_sys_app",
+    category: "Mobile App",
+    description: "Comprehensive all-in-one mobile application (Android & iOS) for students, faculty and staff of SVPCET",
+    image: "https://images.unsplash.com/photo-1526406915844-3cbaefcdff7c?auto=format&fit=crop&q=80&w=800",
+    tags: ["Dart", "Flutter", "Mobile"],
+    link: "#"
+  },
+  {
     id: 6,
-    title: "CleanFrame",
-    category: "Python Data Library",
-    description: "Open-source Python library designed to automate and simplify the data cleaning process for ML pipelines.",
+    title: "Sikander",
+    category: "Asset Management",
+    description: "Portfolio Risk & Asset Management Analyst Dashboard",
+    image: "https://images.unsplash.com/photo-1611974714024-4607a507ae21?auto=format&fit=crop&q=80&w=800",
+    tags: ["Python", "Finance", "Analysis"],
+    link: "https://github.com/theaashaychahande/sikander"
+  },
+  {
+    id: 7,
+    title: "civic_lens",
+    category: "Civic Tech",
+    description: "Mobile civic engagement platform by SENECA — empowers citizens to participate in improving their city",
+    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=800",
+    tags: ["Dart", "SENECA", "Civic"],
+    link: "#"
+  },
+  {
+    id: 8,
+    title: "Project_Drishti",
+    category: "Computer Vision",
+    description: "Real-time Flutter mobile vision app — object recognition and textual sign reading",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
+    tags: ["HTML", "Computer Vision", "Mobile"],
+    link: "https://github.com/theaashaychahande/drishti"
+  },
+  {
+    id: 9,
+    title: "Clinic_management_suite",
+    category: "Healthcare SaaS",
+    description: "Complete clinic workflow and business management system designed for Indian doctors and clinics",
+    image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800",
+    tags: ["SaaS", "Healthcare", "Business"],
+    link: "#"
+  },
+  {
+    id: 10,
+    title: "datacleaner (CleanFrame)",
+    category: "Data Library",
+    description: "One-command data cleaning library — auto-cleans messy datasets, fixes emails, phones, dates with zero setup",
     image: "https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800",
-    tags: ["Python", "Data Science", "Automation"],
+    tags: ["Python", "Data Cleaning", "Library"],
     link: "https://github.com/theaashaychahande/datacleaner"
+  },
+  {
+    id: 11,
+    title: "prototype_model",
+    category: "Management System",
+    description: "Restaurant Management & Booking System with customer-facing and admin functionalities",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800",
+    tags: ["TypeScript", "Full Stack", "Restaurant"],
+    link: "#"
+  },
+  {
+    id: 12,
+    title: "Sign_lang_detector",
+    category: "AI / ML",
+    description: "Streamlit app for live sign language detection and image recognition",
+    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800",
+    tags: ["Python", "Streamlit", "AI"],
+    link: "#"
+  },
+  {
+    id: 13,
+    title: "real_estate_app",
+    category: "Mobile App",
+    description: "A Flutter real estate company application",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800",
+    tags: ["Dart", "Flutter", "Real Estate"],
+    link: "#"
+  },
+  {
+    id: 14,
+    title: "obj_identifier_arch",
+    category: "System Architecture",
+    description: "Microscale Autonomous Sorting Conveyor Mechanism — System Architecture",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
+    tags: ["TypeScript", "Architecture", "Robotics"],
+    link: "#"
+  },
+  {
+    id: 15,
+    title: "Doctor-Clinic-Management-Suite",
+    category: "Healthcare",
+    description: "Doctor and clinic management suite (full system)",
+    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800",
+    tags: ["TypeScript", "Healthcare", "Management"],
+    link: "#"
+  },
+  {
+    id: 16,
+    title: "Drishtii",
+    category: "System Architecture",
+    description: "Physical Data Extraction System Architecture",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+    tags: ["C", "Architecture", "Data Extraction"],
+    link: "#"
+  },
+  {
+    id: 17,
+    title: "financial_portfolio_analyzer",
+    category: "FinTech",
+    description: "Financial data analysis and recommendation system",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    tags: ["Python", "FinTech", "Analysis"],
+    link: "#"
+  },
+  {
+    id: 18,
+    title: "api_calling",
+    category: "Developer Tool",
+    description: "Open source tool to test API keys securely without storing them",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+    tags: ["TypeScript", "API", "Security"],
+    link: "#"
+  },
+  {
+    id: 19,
+    title: "Printo",
+    category: "SaaS Platform",
+    description: "Modern minimal SaaS platform for managing public-specific operational challenges",
+    image: "https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800",
+    tags: ["HTML", "SaaS", "Operations"],
+    link: "#"
+  },
+  {
+    id: 20,
+    title: "vyapar_demo",
+    category: "Inventory App",
+    description: "Inventory management demo app",
+    image: "https://images.unsplash.com/photo-1586769852044-692d6e671c85?auto=format&fit=crop&q=80&w=800",
+    tags: ["Dart", "Inventory", "Demo"],
+    link: "#"
+  },
+  {
+    id: 21,
+    title: "carbon_calculator",
+    category: "Mobile App",
+    description: "Carbon footprint calculator mobile app (4th Semester micro project)",
+    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800",
+    tags: ["Dart", "Sustainability", "Mobile"],
+    link: "#"
   }
 ];
 

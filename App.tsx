@@ -141,54 +141,6 @@ const App: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* Bento Stats Section */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <motion.div 
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 20 }}
-            className="md:col-span-2 glass rounded-[3rem] p-12 flex flex-col justify-between overflow-hidden relative group"
-          >
-            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity">
-              <Star size={200} fill="white" />
-            </div>
-            <div>
-              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#FF5C00]">Project Excellence</span>
-              <h3 className="text-5xl md:text-7xl font-bold font-outfit mt-4 mb-6">High Quality Product & Affordable.</h3>
-            </div>
-            <div className="flex items-center gap-8">
-              <div>
-                <p className="text-4xl font-bold font-outfit">50+</p>
-                <p className="text-xs text-gray-500 uppercase">Happy Clients</p>
-              </div>
-              <div className="w-px h-10 bg-white/10" />
-              <div>
-                <p className="text-4xl font-bold font-outfit">21+</p>
-                <p className="text-xs text-gray-500 uppercase">Total Projects</p>
-              </div>
-              <div className="w-px h-10 bg-white/10" />
-              <div>
-                <p className="text-4xl font-bold font-outfit">9.5</p>
-                <p className="text-xs text-gray-500 uppercase">IITM CGPA</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 20 }}
-            transition={{ delay: 0.1 }}
-            className="glass rounded-[3rem] p-12 flex flex-col items-center justify-center text-center group"
-          >
-            <div className="w-24 h-24 rounded-full bg-[#FF5C00]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <Globe className="text-[#FF5C00]" size={40} />
-            </div>
-            <h4 className="text-2xl font-bold mb-2">Available for Worldwide</h4>
-            <p className="text-gray-500 text-sm">Working with founders and agencies globally from my studio in Maharashtra.</p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Ventures Section */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <div className="mb-16">
@@ -247,37 +199,36 @@ const App: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROJECTS.map((project, idx) => (
             <motion.div 
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className={`group relative rounded-[3rem] overflow-hidden aspect-[4/5] ${idx % 3 === 1 ? 'md:mt-24' : ''}`}
+              className="glass rounded-[2rem] p-8 hover:border-[#FF5C00]/30 transition-all group flex flex-col justify-between"
             >
-              <img 
-                src={project.image} 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
-                alt={project.title} 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
-              <div className="absolute inset-0 bg-[#FF5C00]/20 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay" />
-              
-              <div className="absolute bottom-10 left-10 right-10">
-                <p className="text-[#FF5C00] font-bold text-xs uppercase tracking-widest mb-2">{project.category}</p>
-                <h3 className="text-3xl font-bold font-outfit mb-6">{project.title}</h3>
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-2">
-                    {project.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="px-4 py-1.5 rounded-full glass text-[10px] font-bold">{tag}</span>
-                    ))}
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <div className="px-4 py-1.5 rounded-full bg-[#FF5C00]/10 text-[#FF5C00] text-[10px] font-bold uppercase tracking-widest">
+                    {project.category}
                   </div>
-                  <a href={project.link} className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center -rotate-45 group-hover:rotate-0 transition-transform duration-500">
-                    <ArrowRight size={24} />
+                  <a href={project.link} className="text-gray-400 hover:text-[#FF5C00] transition-colors">
+                    <ArrowRight size={20} />
                   </a>
                 </div>
+                <h3 className="text-2xl font-bold font-outfit mb-3">{project.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                  {project.description}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map(tag => (
+                  <span key={tag} className="px-3 py-1 rounded-lg bg-white/5 text-[10px] font-medium text-gray-400">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
