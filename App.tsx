@@ -1,0 +1,602 @@
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, Variants } from 'framer-motion';
+import { 
+  Github, 
+  Linkedin, 
+  Mail, 
+  Twitter, 
+  Instagram, 
+  ArrowRight, 
+  ExternalLink,
+  Star,
+  Globe,
+  Quote,
+  Zap,
+  Layout,
+  Code,
+  Smartphone,
+  CheckCircle,
+  Menu,
+  X,
+  MapPin,
+  Microscope
+} from 'lucide-react';
+import { PROJECTS, EXPERIENCES, NAV_LINKS, PROCESS_STEPS, EDUCATION, RESEARCH, SKILLS } from './constants';
+
+const App: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Explicitly typing variants to avoid easing string type mismatch
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  return (
+    <div className="relative selection:bg-[#FF5C00] selection:text-white">
+      {/* Dynamic Background */}
+      <motion.div style={{ y: backgroundY }} className="fixed inset-0 z-[-1] overflow-hidden">
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-[#FF5C00]/10 blur-[150px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#FF5C00]/5 blur-[150px] rounded-full" />
+      </motion.div>
+
+      {/* Modern Top Navigation */}
+      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled ? 'py-4 bg-black/50 backdrop-blur-xl border-b border-white/5' : 'py-8'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-3"
+          >
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#FF5C00] to-orange-400 flex items-center justify-center font-bold text-black text-xl">
+              A
+            </div>
+            <span className="text-lg font-bold tracking-tight font-outfit uppercase hidden sm:block">Aashay Chahande</span>
+          </motion.div>
+
+          <div className="hidden md:flex items-center gap-8">
+            {NAV_LINKS.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                className="text-sm font-medium text-gray-400 hover:text-[#FF5C00] transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#FF5C00] transition-all group-hover:w-full" />
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-4">
+            <a href="#contact" className="hidden sm:flex px-6 py-2.5 bg-white text-black font-bold rounded-full text-sm hover:bg-[#FF5C00] hover:text-white transition-all">
+              Let's Talk
+            </a>
+            <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="relative min-h-screen flex flex-col items-center justify-center pt-32 px-6">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="text-center max-w-5xl mx-auto"
+        >
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Open for new AI projects</span>
+          </motion.div>
+
+          <motion.h1 
+            variants={itemVariants}
+            className="text-6xl md:text-8xl lg:text-[10rem] font-extrabold font-outfit leading-[0.9] tracking-tighter mb-8"
+          >
+            AI ARCHITECT<br />
+            <span className="text-gradient">& DEVELOPER</span>
+          </motion.h1>
+
+          <motion.p variants={itemVariants} className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+            AI/ML Specialist & Published Researcher. Founder of <span className="text-white font-bold">SENECA</span>. 
+            Building production-grade intelligent systems across mobile and web.
+          </motion.p>
+
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <a href="#work" className="group relative px-10 py-5 bg-[#FF5C00] text-white font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95">
+              <span className="relative z-10 flex items-center gap-2">VIEW SELECTED WORK <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} /></span>
+            </a>
+            <a href="#about" className="px-10 py-5 glass hover:bg-white/10 rounded-full font-bold transition-all">
+              ABOUT ME
+            </a>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        >
+          <div className="w-px h-12 bg-gradient-to-b from-[#FF5C00] to-transparent" />
+          <span className="text-[10px] uppercase tracking-[0.3em] text-gray-500">Scroll</span>
+        </motion.div>
+      </section>
+
+      {/* Bento Stats Section */}
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div 
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            className="md:col-span-2 glass rounded-[3rem] p-12 flex flex-col justify-between overflow-hidden relative group"
+          >
+            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity">
+              <Star size={200} fill="white" />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#FF5C00]">Project Excellence</span>
+              <h3 className="text-5xl md:text-7xl font-bold font-outfit mt-4 mb-6">High Quality Product & Affordable.</h3>
+            </div>
+            <div className="flex items-center gap-8">
+              <div>
+                <p className="text-4xl font-bold font-outfit">50+</p>
+                <p className="text-xs text-gray-500 uppercase">Happy Clients</p>
+              </div>
+              <div className="w-px h-10 bg-white/10" />
+              <div>
+                <p className="text-4xl font-bold font-outfit">21+</p>
+                <p className="text-xs text-gray-500 uppercase">Total Projects</p>
+              </div>
+              <div className="w-px h-10 bg-white/10" />
+              <div>
+                <p className="text-4xl font-bold font-outfit">9.5</p>
+                <p className="text-xs text-gray-500 uppercase">IITM CGPA</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            transition={{ delay: 0.1 }}
+            className="glass rounded-[3rem] p-12 flex flex-col items-center justify-center text-center group"
+          >
+            <div className="w-24 h-24 rounded-full bg-[#FF5C00]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Globe className="text-[#FF5C00]" size={40} />
+            </div>
+            <h4 className="text-2xl font-bold mb-2">Available for Worldwide</h4>
+            <p className="text-gray-500 text-sm">Working with founders and agencies globally from my studio in Maharashtra.</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Ventures Section */}
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="mb-16">
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Entrepreneurship</span>
+          <h2 className="text-5xl md:text-7xl font-bold font-outfit tracking-tighter">VENTURES</h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div 
+            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            className="glass rounded-[3rem] p-12 group hover:bg-white/5 transition-all"
+          >
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-4xl font-bold font-outfit">SENECA</h3>
+              <div className="px-4 py-1 rounded-full bg-green-500/10 text-green-500 text-[10px] font-bold uppercase tracking-widest">Active</div>
+            </div>
+            <p className="text-gray-400 leading-relaxed mb-8">
+              An early-stage SaaS startup architecting custom AI automation tools, web/mobile applications, and system-level solutions for global clients.
+            </p>
+            <div className="flex gap-4">
+              <span className="text-xs font-bold text-gray-500 border border-white/10 px-4 py-2 rounded-full">AI Automation</span>
+              <span className="text-xs font-bold text-gray-500 border border-white/10 px-4 py-2 rounded-full">SaaS</span>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 20 }}
+            className="glass rounded-[3rem] p-12 group hover:bg-white/5 transition-all"
+          >
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-4xl font-bold font-outfit">Phoenix Algo</h3>
+              <div className="px-4 py-1 rounded-full bg-gray-500/10 text-gray-500 text-[10px] font-bold uppercase tracking-widest">Concluded</div>
+            </div>
+            <p className="text-gray-400 leading-relaxed mb-8">
+              A technical education initiative that ran structured cohorts and workshops on AI/ML, programming, and app development for students.
+            </p>
+            <div className="flex gap-4">
+              <span className="text-xs font-bold text-gray-500 border border-white/10 px-4 py-2 rounded-full">Education</span>
+              <span className="text-xs font-bold text-gray-500 border border-white/10 px-4 py-2 rounded-full">Workshops</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Work Grid - Visual Heavy */}
+      <section id="work" className="py-32 px-6 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div>
+            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Portfolio</span>
+            <h2 className="text-6xl md:text-8xl font-bold font-outfit tracking-tighter">SELECTED WORK</h2>
+          </div>
+          <p className="max-w-xs text-gray-500 leading-relaxed text-sm">
+            Focusing on real-world AI applications that solve complex business logic with elegant design.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {PROJECTS.map((project, idx) => (
+            <motion.div 
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className={`group relative rounded-[3rem] overflow-hidden aspect-[4/5] ${idx % 3 === 1 ? 'md:mt-24' : ''}`}
+            >
+              <img 
+                src={project.image} 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+                alt={project.title} 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
+              <div className="absolute inset-0 bg-[#FF5C00]/20 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay" />
+              
+              <div className="absolute bottom-10 left-10 right-10">
+                <p className="text-[#FF5C00] font-bold text-xs uppercase tracking-widest mb-2">{project.category}</p>
+                <h3 className="text-3xl font-bold font-outfit mb-6">{project.title}</h3>
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-2">
+                    {project.tags.slice(0, 2).map(tag => (
+                      <span key={tag} className="px-4 py-1.5 rounded-full glass text-[10px] font-bold">{tag}</span>
+                    ))}
+                  </div>
+                  <a href={project.link} className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center -rotate-45 group-hover:rotate-0 transition-transform duration-500">
+                    <ArrowRight size={24} />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Skills - Categorized Grid */}
+      <section className="py-32 px-6 max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Expertise</span>
+          <h2 className="text-5xl md:text-7xl font-bold font-outfit tracking-tighter">TECHNICAL STACK</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {SKILLS.map((skillGroup, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="glass rounded-[2.5rem] p-10 hover:border-[#FF5C00]/30 transition-all group"
+            >
+              <h4 className="text-xl font-bold mb-6 text-[#FF5C00] uppercase tracking-widest text-sm">{skillGroup.category}</h4>
+              <div className="flex flex-wrap gap-3">
+                {skillGroup.items.map((skill, i) => (
+                  <span key={i} className="px-4 py-2 rounded-xl bg-white/5 text-xs font-medium text-gray-400 group-hover:text-white transition-colors">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Services - Grid Layout */}
+      <section id="services" className="py-32 px-6 bg-[#050505] border-y border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Services</span>
+              <h2 className="text-5xl md:text-7xl font-bold font-outfit mb-12 tracking-tight">DELIVERING BESPOKE DIGITAL EXPERIENCES</h2>
+              
+              <div className="space-y-12">
+                {[
+                  { icon: <Layout />, title: "UI/UX Design", desc: "Crafting intuitive and aesthetically pleasing interfaces with a focus on user experience." },
+                  { icon: <Smartphone />, title: "App Development", desc: "Building high-performance cross-platform mobile apps using Flutter and Dart." },
+                  { icon: <Code />, title: "AI/ML Solutions", desc: "Integrating intelligent features like computer vision and predictive analytics into your software." }
+                ].map((s, i) => (
+                  <div key={i} className="flex gap-8 group">
+                    <div className="w-16 h-16 shrink-0 rounded-2xl glass flex items-center justify-center text-[#FF5C00] group-hover:bg-[#FF5C00] group-hover:text-white transition-all duration-500">
+                      {s.icon}
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-bold mb-3">{s.title}</h4>
+                      <p className="text-gray-500 leading-relaxed max-w-sm">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative rounded-[3rem] overflow-hidden aspect-square border border-white/10 group">
+              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover filter grayscale opacity-50 transition-all group-hover:grayscale-0 group-hover:opacity-100 duration-1000" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#FF5C00]/20 to-transparent" />
+              <div className="absolute bottom-10 left-10 p-10 glass rounded-[2rem] max-w-xs">
+                 <p className="text-xs text-[#FF5C00] font-bold uppercase mb-2">Next Gen Tech</p>
+                 <p className="font-bold text-xl">Future-proofing your business with cutting edge AI stacks.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Education & Research - Split Layout */}
+      <section id="education" className="py-32 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+          {/* Education */}
+          <div>
+            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Academic Path</span>
+            <h2 className="text-5xl font-bold font-outfit mb-12 tracking-tighter">EDUCATION</h2>
+            <div className="space-y-8">
+              {EDUCATION.map((edu, idx) => (
+                <motion.div 
+                  key={edu.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="glass rounded-[2rem] p-8 border-l-4 border-l-[#FF5C00]"
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <h4 className="text-xl font-bold">{edu.school}</h4>
+                    <span className="text-[10px] font-bold bg-white/5 px-3 py-1 rounded-full text-gray-400">{edu.period}</span>
+                  </div>
+                  <p className="text-[#FF5C00] font-medium mb-2">{edu.degree}</p>
+                  {edu.details && <p className="text-sm text-gray-500 mb-2">{edu.details}</p>}
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">CGPA: {edu.cgpa}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Research */}
+          <div>
+            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Publications</span>
+            <h2 className="text-5xl font-bold font-outfit mb-12 tracking-tighter">RESEARCH</h2>
+            <div className="space-y-8">
+              {RESEARCH.map((res, idx) => (
+                <motion.div 
+                  key={res.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="glass rounded-[2rem] p-8 relative group"
+                >
+                  <div className="w-12 h-12 rounded-full bg-[#FF5C00]/10 flex items-center justify-center mb-6 text-[#FF5C00]">
+                    <Microscope size={24} />
+                  </div>
+                  <h4 className="text-xl font-bold mb-2 group-hover:text-[#FF5C00] transition-colors">{res.title}</h4>
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">{res.publisher}</p>
+                  <p className="text-sm text-gray-400 leading-relaxed mb-6">{res.description}</p>
+                  <a href={res.link} className="inline-flex items-center gap-2 text-xs font-bold text-[#FF5C00] hover:gap-4 transition-all">
+                    READ PAPER <ArrowRight size={14} />
+                  </a>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience - Clean Timeline */}
+      <section id="experience" className="py-32 px-6 max-w-5xl mx-auto">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-bold font-outfit mb-4">CAREER TRAJECTORY</h2>
+          <p className="text-gray-500">A journey through innovation and technical leadership.</p>
+        </div>
+
+        <div className="space-y-4">
+          {EXPERIENCES.map((exp, i) => (
+            <motion.div 
+              key={exp.id}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="group glass rounded-[2rem] p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 hover:border-[#FF5C00]/30 transition-all duration-500"
+            >
+              <div className="flex items-center gap-6">
+                <div className="w-16 h-16 rounded-full glass flex items-center justify-center font-bold text-[#FF5C00]">
+                  0{i + 1}
+                </div>
+                <div>
+                  <h4 className="text-2xl font-bold group-hover:text-[#FF5C00] transition-colors">{exp.company}</h4>
+                  <p className="text-gray-500 text-sm">{exp.role}</p>
+                </div>
+              </div>
+              <div className="flex flex-col items-start md:items-end">
+                <span className="text-xs font-bold bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest text-gray-400 border border-white/5 mb-2">
+                  {exp.period}
+                </span>
+                <p className="text-xs text-gray-600">Location: {exp.location || 'Remote / Studio'}</p>
+              </div>
+              
+              {/* Added description list */}
+              <div className="w-full mt-4 md:hidden group-hover:block transition-all">
+                <ul className="space-y-2">
+                  {exp.description.map((item, idx) => (
+                    <li key={idx} className="text-xs text-gray-500 flex items-start gap-2">
+                      <div className="w-1 h-1 rounded-full bg-[#FF5C00] mt-1.5 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section - Bold & High Impact */}
+      <section id="contact" className="py-32 px-6">
+        <div className="max-w-7xl mx-auto rounded-[4rem] bg-gradient-to-br from-[#111] to-black p-12 md:p-24 border border-white/5 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-[#FF5C00]/5 blur-[100px] pointer-events-none" />
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">Get In Touch</span>
+              <h2 className="text-6xl md:text-8xl font-bold font-outfit mb-12 tracking-tighter leading-none">CONTACT<br />FOR WORK</h2>
+              
+              <div className="space-y-8">
+                <a href="mailto:aashaychahande1717@gmail.com" className="flex items-center gap-6 group">
+                  <div className="w-14 h-14 rounded-full glass flex items-center justify-center group-hover:bg-[#FF5C00] transition-colors">
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase font-bold">Email Me</p>
+                    <p className="text-xl font-medium">aashaychahande1717@gmail.com</p>
+                  </div>
+                </a>
+                <a href="tel:+917507666700" className="flex items-center gap-6 group">
+                  <div className="w-14 h-14 rounded-full glass flex items-center justify-center group-hover:bg-[#FF5C00] transition-colors">
+                    <Smartphone size={24} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase font-bold">Call Me</p>
+                    <p className="text-xl font-medium">+91 7507666700</p>
+                  </div>
+                </a>
+                <div className="flex items-center gap-6 group">
+                  <div className="w-14 h-14 rounded-full glass flex items-center justify-center">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase font-bold">Location</p>
+                    <p className="text-xl font-medium">Maharashtra, India</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <form className="space-y-6 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold text-gray-500 ml-4">Full Name</label>
+                  <input type="text" placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-3xl px-8 py-5 outline-none focus:border-[#FF5C00] transition-all" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold text-gray-500 ml-4">Email Address</label>
+                  <input type="email" placeholder="john@example.com" className="w-full bg-white/5 border border-white/10 rounded-3xl px-8 py-5 outline-none focus:border-[#FF5C00] transition-all" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase font-bold text-gray-500 ml-4">Tell me about your project</label>
+                <textarea rows={5} placeholder="Hello Aashay, I have an idea..." className="w-full bg-white/5 border border-white/10 rounded-[2.5rem] px-8 py-6 outline-none focus:border-[#FF5C00] transition-all resize-none"></textarea>
+              </div>
+              <button className="w-full py-6 bg-[#FF5C00] text-white font-bold rounded-full hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 text-lg">
+                SEND MESSAGE <ArrowRight size={20} />
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-20 px-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#FF5C00] flex items-center justify-center font-bold text-black text-sm">
+              A
+            </div>
+            <span className="text-lg font-bold font-outfit uppercase tracking-tighter">Aashay Chahande</span>
+          </div>
+
+          <div className="flex gap-10 text-sm font-medium text-gray-500">
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Cookies</a>
+          </div>
+
+          <div className="flex gap-4">
+            {[
+              { Icon: Github, href: "https://github.com/theaashaychahande" },
+              { Icon: Linkedin, href: "https://linkedin.com/in/aashaychahande-6928b1310" },
+              { Icon: Instagram, href: "#" },
+              { Icon: Twitter, href: "#" }
+            ].map(({ Icon, href }, idx) => (
+              <a key={idx} href={href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-[#FF5C00] hover:border-[#FF5C00]/30 transition-all">
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="mt-12 text-center text-[10px] text-gray-600 uppercase tracking-[0.4em]">
+          © {new Date().getFullYear()} AASHAY CHAHANDE — CRAFTED WITH PASSION
+        </div>
+      </footer>
+
+      {/* Mobile Nav Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[110] bg-black p-10 flex flex-col justify-between"
+          >
+            <div className="flex justify-between items-center">
+              <span className="font-bold text-xl uppercase tracking-tighter">Menu</span>
+              <button onClick={() => setIsMenuOpen(false)} className="w-12 h-12 rounded-full glass flex items-center justify-center">
+                <X />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-8">
+              {NAV_LINKS.map((link, idx) => (
+                <motion.a
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-5xl font-bold font-outfit tracking-tighter hover:text-[#FF5C00] transition-colors"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+            </div>
+
+            <div className="flex gap-6">
+               <Github className="text-gray-500" />
+               <Linkedin className="text-gray-500" />
+               <Instagram className="text-gray-500" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default App;
