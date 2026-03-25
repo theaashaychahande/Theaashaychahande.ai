@@ -25,9 +25,14 @@ import {
   Cpu,
   Layers,
   Database,
-  BrainCircuit
+  BrainCircuit,
+  Award,
+  BookOpen,
+  Briefcase
 } from 'lucide-react';
 import { PROJECTS, EXPERIENCES, NAV_LINKS, PROCESS_STEPS, EDUCATION, RESEARCH, SKILLS } from './constants';
+import theaashayPic from "./theaashay.png";
+
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -145,6 +150,110 @@ const App: React.FC = () => {
           <div className="w-px h-12 bg-gradient-to-b from-[#FF5C00] to-transparent" />
           <span className="text-[10px] uppercase tracking-[0.3em] text-gray-500">Scroll</span>
         </motion.div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-32 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          {/* Left Column: Image */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="absolute inset-0 bg-[#FF5C00]/20 blur-[100px] rounded-full" />
+            <div className="relative rounded-[3rem] overflow-hidden border border-white/10 glass h-[700px] lg:h-[850px] group w-full">
+              {/* Glow backdrop */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              {/* Personal Motto overlay at the top */}
+              <div className="absolute top-0 left-0 right-0 z-20 px-8 pt-10 text-center">
+                <p
+                  className="font-outfit font-bold uppercase tracking-tighter text-white/90 mb-4 leading-tight"
+                  style={{
+                    fontSize: 'clamp(1.2rem, 2.8vw, 2rem)',
+                    textShadow: '0 2px 24px rgba(0,0,0,0.95), 0 1px 6px rgba(0,0,0,0.9)'
+                  }}
+                >
+                  BRILLIANCE IS NOT<br />
+                  ABOUT KNOWING EVERYTHING.<br />
+                  <span className="text-[#FF5C00]">IT IS ABOUT KNOWING</span><br />
+                  EXACTLY WHAT MATTERS<br />
+                  AND BUILDING THAT.
+                </p>
+                <p
+                  className="text-[#FF5C00] font-bold uppercase tracking-[0.4em]"
+                  style={{ fontSize: 'clamp(0.6rem, 1vw, 0.75rem)', textShadow: '0 2px 12px rgba(0,0,0,0.9)' }}
+                >
+                  — Aashay Chahande
+                </p>
+              </div>
+              {/* Centered large image */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img 
+                  src={theaashayPic} 
+                  alt="Aashay Chahande" 
+                  className="w-[130%] max-w-none object-contain filter grayscale opacity-90 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105" 
+                />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-10">
+                <p className="font-outfit font-bold text-2xl">Aashay Chahande</p>
+                <p className="text-[#FF5C00] font-bold text-sm tracking-widest uppercase mb-2">AI Specialist & Founder</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Text */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#FF5C00] mb-4 block">About Me</span>
+            <h2 className="text-5xl md:text-6xl font-bold font-outfit mb-6 tracking-tighter leading-none">
+              ENGINEERING<br />
+              <span className="text-gray-500">INTELLIGENT SYSTEMS</span>
+            </h2>
+            
+            <p className="text-[#FF5C00] font-bold text-sm sm:text-base mb-8 uppercase tracking-widest leading-relaxed">
+              ML Specialist • Mobile Engineer • Technical Educator • Published Researcher
+            </p>
+
+            <div className="space-y-6 text-gray-400 text-base md:text-lg leading-relaxed mb-10">
+              <p>
+                I am an AI/ML Specialist and published researcher. My work spans the full spectrum of intelligent systems — from designing and training deep learning models to deploying production-grade applications on mobile and web platforms. 
+              </p>
+              <p>
+                Currently pursuing a B.Tech in Mechanical Engineering at SVPCET, Nagpur, I combine mechanical engineering principles with cutting-edge machine learning to build systems that are not just technically sound but practically impactful.
+              </p>
+              <p>
+                I'm the Founder of <span className="text-white font-bold">SENECA</span>, architecting custom AI automation tools and system-level solutions. Previously, I founded <span className="text-white font-bold">Phoenix Algo</span> to help students move from theory to real-world application through practical teaching.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-6 mb-10">
+              <div className="glass p-6 rounded-[2rem] border-l-2 border-l-[#FF5C00]">
+                <div className="text-3xl font-bold font-outfit text-white mb-1">50+</div>
+                <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">Client Projects</p>
+              </div>
+              <div className="glass p-6 rounded-[2rem] border-l-2 border-l-[#FF5C00]">
+                <div className="text-3xl font-bold font-outfit text-white mb-1">4+</div>
+                <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">Years Freelance</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <a href="#contact" className="px-8 py-4 bg-[#FF5C00] text-white font-bold rounded-full hover:scale-[1.02] active:scale-[0.98] transition-transform flex items-center gap-2 text-sm">
+                <Mail size={16} /> Let's Connect
+              </a>
+              <a href="https://github.com/theaashaychahande" target="_blank" rel="noopener noreferrer" className="px-8 py-4 glass hover:bg-white/10 text-white font-bold rounded-full transition-all flex items-center gap-2 text-sm border border-white/5 hover:border-[#FF5C00]/30">
+                <Github size={16} /> GitHub Profile
+              </a>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Ventures Section */}
