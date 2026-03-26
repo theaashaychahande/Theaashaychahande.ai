@@ -8,15 +8,9 @@ import {
   Twitter, 
   Instagram, 
   ArrowRight, 
-  ExternalLink,
-  Star,
-  Globe,
-  Quote,
-  Zap,
   Layout,
   Code,
   Smartphone,
-  CheckCircle,
   Menu,
   X,
   MapPin,
@@ -25,12 +19,9 @@ import {
   Cpu,
   Layers,
   Database,
-  BrainCircuit,
-  Award,
-  BookOpen,
-  Briefcase
+  BrainCircuit
 } from 'lucide-react';
-import { PROJECTS, EXPERIENCES, NAV_LINKS, PROCESS_STEPS, EDUCATION, RESEARCH, SKILLS } from './constants';
+import { PROJECTS, EXPERIENCES, NAV_LINKS, EDUCATION, RESEARCH, SKILLS } from './constants';
 import theaashayPic from "./theaashay.png";
 
 
